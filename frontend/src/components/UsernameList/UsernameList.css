@@ -1,0 +1,40 @@
+.Chatroom-username-container {
+  padding: 1rem;
+  height: 100%;
+  width: 30%;
+  font-family: 'Roboto', sans-serif;
+}
+
+.Chatroom-username {
+  height: 100%;
+  border: 1px solid rgba(30, 144, 255, 0.8);
+  border-radius: 25px;
+}
+
+.Chatroom-username-title {
+  font-size: 130%;
+  padding: 2rem 1rem 2rem 1rem;
+  height: 3rem;
+  border-bottom: 1px dashed rgba(50, 50, 50, 0.5);
+  display: flex;
+  align-items: center;
+}
+
+.Chatroom-username-list {
+  min-height: 10rem;
+}
+
+.Chatroom-username-name {
+  padding: 1rem;
+  height: 3rem;
+  border-bottom: 1px solid rgba(50, 50, 50, 0.3);
+  display: flex;
+  align-items: center;
+  transition-duration: 100ms;
+  transition-timing-function: ease-in-out;
+}
+
+.Chatroom-username-name:hover {
+  background-color: rgba(50, 50, 50, 0.1);
+  cursor: pointer;
+}
