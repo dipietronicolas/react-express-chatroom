@@ -1,6 +1,9 @@
 import './App.css';
 import React, { useState, useEffect } from "react";
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { ChatRoomContainer } from './components/ChatRoomContainer/ChatRoomContainer';
+import { Home } from './components/Home/Home';
+import { CartDataProvider } from './context/UserContext';
 import socketIOClient from "socket.io-client";
 
 const ENDPOINT = "http://127.0.0.1:4001";
@@ -18,10 +21,20 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Chat Room</h1>
-      <p>{response}</p>
-      <ChatRoomContainer />
+      <BrowserRouter>
+        <CartDataProvider>
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/chatroom/">
+              <ChatRoomContainer />
+            </Route>
+          </Switch>
+        </CartDataProvider>
+      </BrowserRouter>
     </div>
+
   );
 }
 
