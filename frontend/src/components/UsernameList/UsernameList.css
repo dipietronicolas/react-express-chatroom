@@ -1,14 +1,18 @@
 .Chatroom-username-container {
   padding: 1rem;
   height: 100%;
-  width: 30%;
+  width: 25%;
+  min-width: 14rem;
   font-family: 'Roboto', sans-serif;
+  transition-duration: 200ms;
+  transition-timing-function: ease-in-out;
 }
 
 .Chatroom-username {
   height: 100%;
   border: 1px solid rgba(30, 144, 255, 0.8);
   border-radius: 25px;
+  background: linear-gradient(to bottom left,rgba(240,240,240, 0.8), white, rgba(240,240,240, 0.8));
 }
 
 .Chatroom-username-title {
@@ -38,3 +42,4 @@
   background-color: rgba(50, 50, 50, 0.1);
   cursor: pointer;
 }
+

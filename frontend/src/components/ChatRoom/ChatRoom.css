@@ -1,99 +1,9 @@
 .Chatroom {
   height: 100%;
   width: 100%;
-
   display: flex;
   justify-content: center;
 }
 
 
-
-.Chatroom-message {
-  padding:1rem;
-  height: 100%;
-  width: 70%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  
-}
-
-.Chatroom-chat {
-  padding: 1rem;
-  height: 85%;
-  width: 100%;
-  font-family: 'Roboto', sans-serif;
-  font-size: 90%;
-  background: linear-gradient(to left, ghostwhite, AntiqueWhite);
-  border-radius: 25px;
-  border: 1px solid rgba(30, 144, 255, 0.8);
-}
-
-.Chatroom-chat-name-message{
-  padding: 0.3rem;
-  width: fit-content;
-  margin-bottom: 0.5rem;
-  background-color: white;
-  border-radius: 15px;
-  border: 1px solid rgba(50,50,50,0.1);
-  display: flex;
-  flex-direction: column;
-}
-
-.Chatroom-chat-name-container {
-  width: 15%;
-  
-  padding: 0.2rem;
-}
-
-.Chatroom-chat-message-container {
-  width: fit-content;
-  padding: 0.2rem 0.5rem 0.2rem 0.5rem;
-  
-}
-
-.Chatroom-input-container {
-  height: 3rem;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-.Chatroom-input {
-  padding: 0.5rem 1rem 0.5rem 1rem;
-  height: 3rem;
-  width: 70%;
-  font-size: 110%;
-  border-top-left-radius: 25px;
-  border-bottom-left-radius: 25px;
-  border: 1px solid rgba(30, 144, 255, 0.8);
-}
-
-.Chatroom-input:focus {
-  outline: none;
-}
-
-.Chatroom-send-btn {
-  height: 3rem;
-  width: 30%;
-  padding-right: 0.5rem;
-  background: none;
-  color: rgba(30, 144, 255, 0.8);
-  font-size: 110%;
-  border-top-right-radius: 25px;
-  border-bottom-right-radius: 25px;
-  border: 1px solid rgba(30, 144, 255, 0.8);
-
-  transition-duration: 200ms;
-  transition-timing-function: ease-in-out;
-}
-
-.Chatroom-send-btn:focus {
-  outline: none;
-}
-
-.Chatroom-send-btn:hover {
-  background: dodgerblue;
-  color: ivory;
-}
 

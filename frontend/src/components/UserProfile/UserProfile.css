@@ -1,0 +1,139 @@
+.UserProfile-container {
+  padding: 1rem;
+  height: 100%;
+  width: 25%;
+  min-width: 14rem;
+  font-family: 'Roboto', sans-serif;
+  transition-duration: 200ms;
+  transition-timing-function: ease-in-out;
+}
+
+.UserProfile {
+  padding: 1rem;
+  height: 100%;
+  border: 1px solid rgba(30, 144, 255, 0.8);
+  border-radius: 25px;
+  background: linear-gradient(to bottom right,rgba(240,240,240, 0.8), white, rgba(240,240,240, 0.8));
+}
+
+.UserProfile-username-container {
+  height: 10rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.UserProfile-img-container {
+  font-size: 500%;
+}
+
+.UserProfile-edit {
+  width: 80%;
+  height: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.UserProfile-edit-button {
+  background: none;
+  border: none;
+  color:rgb(150,150,150);
+  font-size: 120%;
+  height: 2rem;
+  width: 2rem;
+  cursor: pointer;
+}
+
+.UserProfile-edit-button:hover {
+  color: rgb(75,75,75);
+}
+
+.UserProfile-edit-button:focus {
+  outline:none;
+}
+
+.UserProfile-editInputContainer {
+  height: 2rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.UserProfile-editInputContainer form {
+  height: 100%;
+  width:100%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.UserProfile-edit-input {
+  border: none;
+  border-bottom: 1px solid rgb(150,150,150);
+  background: none;
+  width: 100%;
+  height: 100%;
+}
+
+.UserProfile-edit-input:focus {
+  outline: none;
+  font-size: 100%;
+  border-bottom: 1px solid dodgerblue;
+}
+
+.UserProfile-edit-input-button {
+  background: none;
+  border: none;
+  color:darkgreen;
+  height: 2rem;
+  width: 2rem;
+  cursor: pointer;
+  font-size: 120%;
+}
+
+.UserProfile-edit-input-button:focus {
+  outline:none;
+}
+
+.UserProfile-edit-input-cancel-button{
+  background: none;
+  border: none;
+  color:crimson;
+  height: 2rem;
+  width: 2rem;
+  cursor: pointer;
+  font-size: 120%;
+}
+
+.UserProfile-edit-input-cancel-button:focus {
+  outline:none;
+}
+
+.UserProfile-show {
+  transform: translateX(-250px);
+  display: block;
+}
+
+@media screen and (max-width:1920px) {
+  .UserProfile-show {
+    transform: translateX(0px);
+    display: block;
+  }
+}
+
+@media screen and (max-width:1024px) {
+  .UserProfile-container {
+    transform: translateX(250px);
+    display: none;
+  }
+  .UserProfile-show {
+    transform: translateX(0px);
+    display: block;
+  }
+}

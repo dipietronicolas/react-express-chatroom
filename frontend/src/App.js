@@ -1,38 +1,20 @@
 import './App.css';
-import React, { useState, useEffect } from "react";
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import React, { useContext } from "react";
 import { ChatRoomContainer } from './components/ChatRoomContainer/ChatRoomContainer';
 import { Home } from './components/Home/Home';
-import { CartDataProvider } from './context/UserContext';
-import socketIOClient from "socket.io-client";
-
-const ENDPOINT = "http://127.0.0.1:4001";
+import { UserContext } from './context/UserContext';
 
 function App() {
 
-  const [response, setResponse] = useState("");
-
-  useEffect(() => {
-    const socket = socketIOClient(ENDPOINT);
-    socket.on("FromAPI", data => {
-      setResponse(data);
-    });
-  }, []);
+  const { username } = useContext(UserContext);
 
   return (
     <div className="App">
-      <BrowserRouter>
-        <CartDataProvider>
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route path="/chatroom/">
-              <ChatRoomContainer />
-            </Route>
-          </Switch>
-        </CartDataProvider>
-      </BrowserRouter>
+        {
+          username
+          ? <ChatRoomContainer />
+          : <Home />
+        }
     </div>
 
   );

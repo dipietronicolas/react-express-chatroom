@@ -1,0 +1,50 @@
+.Chatroom-input-container {
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+}
+.Chatroom-form {
+  width: 100%;
+  background: none;
+}
+
+.Chatroom-input {
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  height: 3rem;
+  width: 70%;
+  font-size: 110%;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  border: 1px solid rgba(30, 144, 255, 0.8);
+  
+}
+
+.Chatroom-input:focus {
+  outline: none;
+}
+
+.Chatroom-send-btn {
+  height: 3rem;
+  width: 30%;
+  padding-right: 0.5rem;
+  color: rgba(30, 144, 255, 0.8);
+  font-size: 110%;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  border: 1px solid rgba(30, 144, 255, 0.8);
+  background: white;
+  cursor: pointer;
+  transition-duration: 200ms;
+  transition-timing-function: ease-in-out;
+}
+
+.Chatroom-send-btn:focus {
+  outline: none;
+}
+
+.Chatroom-send-btn:hover {
+  background: dodgerblue;
+  color: ivory;
+}

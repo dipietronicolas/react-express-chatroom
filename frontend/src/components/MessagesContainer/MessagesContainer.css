@@ -1,0 +1,87 @@
+.Chatroom-message {
+  position: relative;
+  padding:1rem;
+  height: 100%;
+  width: 70%;
+  display: flex;
+  border-radius: 25px;
+  flex-direction: column;
+  justify-content: space-between;
+  background: linear-gradient(to bottom, teal, white);
+}
+
+.Userprofile-show-button{
+  display: none;
+  padding: 0;
+  position: absolute;
+  top:1rem;
+  right: 1rem;
+  border: 1px solid rgba(20,20,20,0.5);
+  border-top-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+  height: 2rem;
+  width: 5rem;
+  font-style: italic;
+  cursor: pointer;
+  transition-duration: 100ms;
+  transition-timing-function:ease;
+  z-index: 3;
+}
+
+.Userprofile-show-button:hover{
+  font-weight: bold;
+  text-shadow: 0px 0px 5px teal;
+  font-size: 90%;
+  height: 2.5rem;
+  width: 5.5rem;
+}
+
+.Userprofile-show-button:focus {
+  outline: none;
+}
+
+.Chatroom-chat {
+  padding: 1rem;
+  height: 85%;
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(to left, ghostwhite, AntiqueWhite);
+  border-radius: 25px;
+  border: 1px solid rgba(30, 144, 255, 0.8);
+}
+
+.Chatroom-chat-name-message{
+  padding: 0.3rem;
+  width: fit-content;
+  margin-bottom: 0.5rem;
+  background-color: white;
+  border-radius: 15px;
+  border: 1px solid rgba(50,50,50,0.1);
+  display: flex;
+  flex-direction: column;
+  font-size: 90%;
+  
+}
+
+.Chatroom-chat-name-container {
+  width: 100%;
+  padding: 0.2rem;
+}
+
+.Chatroom-chat-message-container {
+  width: fit-content;
+  padding: 0.2rem;
+  color: rgba(20,20,20,0.8);
+}
+
+@media screen and (max-width:1024px){
+  .Userprofile-show-button {
+    display: block;
+  }
+}
+
+@media screen and (max-width:768px) {
+  .Chatroom-message {
+    width: 100%;
+  }
+}

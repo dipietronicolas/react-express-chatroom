@@ -2,11 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import { UserProvider } from './context/UserContext';
+import { SocketProvider } from './context/SocketContext';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <SocketProvider>
+      <UserProvider>
+        <App />
+      </UserProvider>
+    </SocketProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

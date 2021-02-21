@@ -1,19 +1,20 @@
 .Home {
     height: 90vh;
     width: 100%;
-    
     display: flex;
     justify-content: center;
 }
 
 .Home-form {
+    position: relative;
     font-family: 'Raleway', sans-serif;
     font-size: 120%;
     font-style: italic;
     padding: 2rem 0 2rem 0;
-    height: 15rem;
+    height: 20rem;
     width: 30rem;
     border:1px solid rgb(30, 144, 255);
+    background: linear-gradient(to bottom right, white, rgba(240,240,240, 0.8), white);
     border-radius: 25px;
     display: flex;
     flex-direction: column;
@@ -21,17 +22,56 @@
     justify-content: space-around;
 }
 
+.alert-error {
+    position: absolute;
+    top:38%;
+    height: 2.5rem;
+    width: 25rem;
+    background-color: rgba(220, 20, 60, 0.3);
+    font-size: 90%;
+    font-style: normal;
+    color: ivory;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .Home-input {
     margin-top: 1rem;
     height: 2.5rem;
     width: 15rem;
     padding: 0.5rem 1rem 0.5rem 1rem;
+    font-size: 105%;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+    background: none;
+    border: none;
+    border-bottom: 1px solid rgba(20,20,20,0.4);
 }
 
 .Home-input:focus {
     outline: none;
+    border-bottom: 1px solid rgba(30, 144, 255, 0.8);
 }
 
-.Home-button {
+.Home-submit-button {
+    height: 3rem;
+    width: 10rem;
+    background: dodgerblue;
+    color: whitesmoke;
+    border: 1px solid dodgerblue;
+    border-radius: 4px;
+    font-size: 90%;
+    transition-duration: 200ms;
+    transition-timing-function: ease-in-out;
+}
+
+.Home-submit-button:focus {
+    outline: none;
+}
+
+.Home-submit-button:hover {
+    text-shadow: 0px 0px 1px ivory;
+    box-shadow: 0px 0px 5px 0px dodgerblue;
 
 }

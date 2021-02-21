@@ -1,6 +1,13 @@
 .Chatroom-container {
-  width: 50rem;
-  height: 30rem;
-  background-color: white;
+  width: 80%;
+  height: 40rem;
+  background:linear-gradient(to bottom, rgba(80, 140, 190, 0.4), rgba(80, 140, 190, 0.1));
   padding:1rem;
+  border-radius: 25px;
+}
+
+@media screen and (max-width: 1000px) {
+  .Chatroom-container {
+    width: 100%;
+  }
 }
