@@ -8,13 +8,13 @@ export const Home = () => {
   const { addUsername } = useContext(UserContext);
   const { newUser } = useContext(SocketContext);
   const [errorMsg, setErrorMsg] = useState(null);
- 
+
   let inputRef = useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     addUsername(inputRef.current.value, (callback) => {
-      if(callback){
+      if (callback) {
         newUser(inputRef.current.value);
       } else {
         setErrorMsg('El nombre de usuario no se encuentra disponible')
@@ -25,8 +25,11 @@ export const Home = () => {
   return (
     <div className="Home">
       <form className="Home-form" onSubmit={handleSubmit}>
-        <h3>WELLCOME TO FANTASTIC CHAT!</h3>
-        <p>Type your username</p>
+        <div className="Home-title-coontainer">
+          <h2>WELLCOME TO FANTASTIC CHAT!</h2>
+          <p>Type your username</p>
+
+        </div>
         {
           errorMsg && <div className="alert-error">{errorMsg}</div>
         }
@@ -35,9 +38,9 @@ export const Home = () => {
           name="username"
           className="Home-input"
           type="text"
-          max="20"
-          min="3"
-          autoFocus/>
+          maxLength="30"
+          minLength="2"
+          autoFocus />
         <button
           className="Home-submit-button"
           type="submit">CONFIRM</button>

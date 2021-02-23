@@ -6,25 +6,39 @@
 }
 
 .Home-form {
+    margin-top: 3rem;
+    padding-bottom: 2rem;
     position: relative;
     font-family: 'Raleway', sans-serif;
     font-size: 120%;
     font-style: italic;
-    padding: 2rem 0 2rem 0;
     height: 20rem;
-    width: 30rem;
-    border:1px solid rgb(30, 144, 255);
+    width: 35rem;
     background: linear-gradient(to bottom right, white, rgba(240,240,240, 0.8), white);
     border-radius: 25px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
+}
+
+.Home-title-coontainer {
+    padding: 0.5rem 0 0.5rem 0;
+    height: 50%;
+    width: 100%;
+    background: rgb(75,75,75);
+    color: white;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    display: flex;
+    flex-direction: column;
     justify-content: space-around;
+    align-items: center;
 }
 
 .alert-error {
     position: absolute;
-    top:38%;
+    top:110%;
     height: 2.5rem;
     width: 25rem;
     background-color: rgba(220, 20, 60, 0.3);

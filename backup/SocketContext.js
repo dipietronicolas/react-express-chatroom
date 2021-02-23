@@ -15,7 +15,7 @@ export const SocketContext = React.createContext();
 export const SocketProvider = ({ children }) => {
   
   const [usernames, setUsernames] = useState([]);
-  const [message, setMessage] = useState(null);
+  const [chatHistory, setChatHistory] = useState([]);
   
   useEffect(() => {
     socket.on("usernames", data => {
@@ -28,6 +28,9 @@ export const SocketProvider = ({ children }) => {
     socket.on("usernames", data => {
       setUsernames(data);
     });
+    socket.on("chat_history", (data) => {
+      setChatHistory(data);
+    })
   }
 
   const updateUser = (name) => {
@@ -35,6 +38,9 @@ export const SocketProvider = ({ children }) => {
     socket.on("usernames", data => {
       setUsernames(data);
     });
+    socket.on("chat_history", (data) => {
+      setChatHistory(data);
+    })
   }
 
   const sendMessage = (message) => {
@@ -42,9 +48,6 @@ export const SocketProvider = ({ children }) => {
       msg: message,
       type: "text"
     });
-    socket.on('send_msg', (msg) => {
-      setMessage(msg);
-    })
   }
 
   const sendPicture = (message) => {
@@ -52,9 +55,6 @@ export const SocketProvider = ({ children }) => {
       msg: message,
       type: "picture"
     });
-    socket.on('send_msg', (msg) => {
-      setMessage(msg);
-    })
   }
 
   return (
@@ -63,9 +63,9 @@ export const SocketProvider = ({ children }) => {
         usernames,
         newUser,
         sendMessage,
+        chatHistory,
         updateUser,
-        sendPicture,
-        message
+        sendPicture
       }}>
       { children }
     </SocketContext.Provider>

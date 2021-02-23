@@ -21,11 +21,12 @@ export const UserProfile = () => {
         setErrorMsg('El nombre de usuario no se encuentra disponible')
       }
     });
-      
+
     handleCancelButton();
   }
 
   const handleEditName = () => {
+    setErrorMsg(null);
     setShowEditName(true);
     const edit_button = document.querySelector('.UserProfile-edit-button');
     edit_button.style.display = "none";
@@ -54,6 +55,8 @@ export const UserProfile = () => {
                       className="UserProfile-edit-input"
                       type="text"
                       ref={inputRef}
+                      maxLength="30"
+                      minLength="2"
                       autoFocus>
                     </input>
                     <button
@@ -69,8 +72,8 @@ export const UserProfile = () => {
                 </div>
                 :
                 <p className="UserProfile-username">{username}</p>
-
-            }
+                
+              }
             <button
               className="UserProfile-edit-button"
               onClick={handleEditName}>
@@ -78,6 +81,9 @@ export const UserProfile = () => {
             </button>
           </div>
         </div>
+                {
+                  errorMsg && <div className="alert">{errorMsg}</div>
+                }
 
       </div>
     </div>

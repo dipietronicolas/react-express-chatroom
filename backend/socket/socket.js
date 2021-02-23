@@ -1,7 +1,6 @@
 const socketIo = (io) => {
 
   let usernames = [];
-  let chat = [];
   const colors = ["slateblue", "blueviolet", 
     "darkblue", "darkgreen", "darkred", "dodgerblue",
     "goldenrod", "hotpink", "sienna", 
@@ -12,14 +11,11 @@ const socketIo = (io) => {
 
     console.log("New client connected");
 
-    
-
     socket.on('new_user', (data) => {
       socket.username = data;
       socket.color = colors[Math.floor(Math.random() * colors.length)];
       usernames.push(socket.username);
       updateUsernames();
-      updateChat();
       console.log('Nuevo usuario conectado: ' + socket.username);
     });
 
@@ -28,28 +24,28 @@ const socketIo = (io) => {
       socket.username = data;
       usernames.splice(index, 1, socket.username);
       updateUsernames();
-      updateChat();
       console.log('Usuario modificado: ' + socket.username);
     });
 
     socket.on('send_message', data => {
       console.log(data);
       const new_message = {
-        msg: data,
+        msg: data.msg,
+        type: data.type,
         username: socket.username,
         color: socket.color
       }
-      chat.push(new_message);
-      updateChat();
+      sendMessage(new_message);
     });
 
+    
     const updateUsernames = () => {
       io.sockets.emit('usernames', usernames);
     }
     updateUsernames();
 
-    const updateChat = () => {
-      io.sockets.emit('chat_history', chat);
+    const sendMessage = (msg) => {
+      io.sockets.emit('send_msg', msg);
     }
 
     socket.on("disconnect", () => {

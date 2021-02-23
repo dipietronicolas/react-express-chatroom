@@ -1,5 +1,5 @@
 .Chatroom-username-container {
-  padding: 1rem;
+  padding: 0 1rem 0 1rem;
   height: 100%;
   width: 25%;
   min-width: 14rem;
@@ -10,16 +10,20 @@
 
 .Chatroom-username {
   height: 100%;
-  border: 1px solid rgba(30, 144, 255, 0.8);
+  /*border: 1px solid rgba(30, 144, 255, 0.8);*/
   border-radius: 25px;
   background: linear-gradient(to bottom left,rgba(240,240,240, 0.8), white, rgba(240,240,240, 0.8));
 }
 
 .Chatroom-username-title {
+  background-color: rgb(75,75,75);
+  color: rgb(240,240,240);
   font-size: 130%;
   padding: 2rem 1rem 2rem 1rem;
-  height: 3rem;
+  height: 5rem;
   border-bottom: 1px dashed rgba(50, 50, 50, 0.5);
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
   display: flex;
   align-items: center;
 }
@@ -38,8 +42,19 @@
   transition-timing-function: ease-in-out;
 }
 
+.Chatroom-username-icon {
+  margin-right: 1rem;
+  height: 3rem;
+  width: 3rem;
+  font-size: 150%;
+  color: rgb(100,100,100);
+  transition: 100ms;
+  transition-timing-function: ease-in-out;
+}
+
 .Chatroom-username-name:hover {
   background-color: rgba(50, 50, 50, 0.1);
   cursor: pointer;
 }
+
 
