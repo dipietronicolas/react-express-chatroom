@@ -3,6 +3,15 @@ import { UserContext } from '../../context/UserContext';
 import { SocketContext } from '../../context/SocketContext';
 // CSS
 import './Home.css';
+// Material UI
+import { Button, TextField } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  button: {
+    padding: theme.spacing(2)
+  },
+}));
 
 export const Home = () => {
 
@@ -10,12 +19,13 @@ export const Home = () => {
   const { newUser } = useContext(SocketContext);
   const [errorMsg, setErrorMsg] = useState(null);
 
+  const classes = useStyles();
 
   let inputRef = useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(inputRef.current.value){
+    if (inputRef.current.value) {
       addUsername(inputRef.current.value, (callback) => {
         if (callback) {
           newUser(inputRef.current.value);
@@ -25,7 +35,7 @@ export const Home = () => {
       })
     }
   }
-  
+
   return (
     <div className="Home">
       <form className="Home-form" onSubmit={handleSubmit}>
@@ -37,6 +47,12 @@ export const Home = () => {
         {
           errorMsg && <div className="alert-error">{errorMsg}</div>
         }
+        <TextField 
+          id="standard-basic" 
+          label="Username" 
+          inputRef={inputRef}
+          autoFocus/>
+        {/** 
         <input
           ref={inputRef}
           name="username"
@@ -45,9 +61,19 @@ export const Home = () => {
           maxLength="30"
           minLength="2"
           autoFocus />
+          */}
+        {/**
         <button
           className="Home-submit-button"
           type="submit">CONFIRM</button>
+           */}
+        <Button 
+          type="submit"
+          className={classes.button}
+          variant="contained" 
+          color="primary">
+          CONFIRM
+        </Button>
       </form>
     </div>
   )

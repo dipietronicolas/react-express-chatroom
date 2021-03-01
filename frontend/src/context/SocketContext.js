@@ -37,7 +37,6 @@ export const SocketProvider = ({ children }) => {
   }
 
   const sendMessage = (message) => {
-
     socket.emit('send_message', {
       msg: message,
       type: "text"
