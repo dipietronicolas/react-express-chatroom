@@ -28,7 +28,6 @@ const socketIo = (io) => {
     });
 
     socket.on('send_message', data => {
-      
       console.log(data);
       const new_message = {
         msg: data.msg,
