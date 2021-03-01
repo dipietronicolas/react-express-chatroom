@@ -1,54 +1,79 @@
-import React, { useState, useContext, useRef } from 'react';
-import { SocketContext } from '../../context/SocketContext';
+import React, { useState, useRef } from 'react';
 import './SendPicture.css';
 
-export const SendPicture = () => {
+export const SendPicture = ({ handleSetPicture }) => {
 
   const pictureRef = useRef(null);
-  const { sendPicture } = useContext(SocketContext);
-  const [picture, setPicture] = useState(null);
-  
-
+  const [errMsg, setErrMsg] = useState(null);
   const handleFileUpload = () => {
     pictureRef.current.click();
   }
 
+  // Llevo la imagen por props al componente padre
   const handleChange = (e) => {
-    if(e.target.files[0]){
-      setPicture(e.target.files[0])
+    //console.log(e.target.files[0]);
+    if (e.target.files[0] && e.target.files[0].size < 999999) {
+      let picture = e.target.files[0];
+      
+      // Obtengo height y width de la imagen.
+      let _URL = window.URL || window.webkitURL;
+      let img = new Image();
+      img.src = _URL.createObjectURL(e.target.files[0]);
+      img.onload = function () {
+        if (this.height > this.width) {
+          handleSetPicture({
+            picture,
+            type: 'higher'
+          });
+        } else {
+          handleSetPicture({
+            picture,
+            type: 'wider'
+          });
+        }
+      };
+      img.onerror = function () {
+        alert("not a valid file");
+      };
+      //Termino el manejo de la imagen
+
       const button = document.querySelector('.SendPicture-upload-button');
       button.style.color = "green";
+    } else {
+      // Si la imagen es mayor a 1 mega no la sube y muestra un error.
+      setErrMsg("Image max size must be 1 MB");
+      setTimeout(() => {
+        const alert = document.querySelector('.alert-err');
+        alert.style.opacity = 0;
+        setTimeout(() => {
+          setErrMsg(null);
+        }, 500)
+      }, 7000)
     }
+    pictureRef.current.value = null;
   };
-  
-  const handleSendPicture = () => {
-    if(picture){
-      sendPicture(picture);
-      const button = document.querySelector('.SendPicture-upload-button');
-      button.style.color = "rgb(150,150,150)";
-    }
-  }
 
   return (
     <div className="SendPictureContainer">
-      <input 
+      <input
         ref={pictureRef}
-        type="file" 
+        type="file"
+        accept="image/*"
         className="SendPicture-upload"
         onChange={handleChange}
         style={{ display: "none" }}>
       </input>
-      <button 
+
+      <button
         onClick={handleFileUpload}
         className="SendPicture-upload-button">
-          <i className="fas fa-image"></i>
+        <i className="fas fa-image"></i>
+        <p className="SendPicture-upload-text">Upload picture</p>
+
       </button>
-      <button 
-        onClick={handleSendPicture}
-        className="SendPicture-send-button">
-          <i className="fas fa-file-import"></i>
-      </button>
-      <p className="SendPicture-send-button-text">Enviar imagen</p>
+      {
+        errMsg && <div className="alert-err">{errMsg}</div>
+      }
     </div>
   )
 }

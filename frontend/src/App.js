@@ -7,7 +7,6 @@ import { UserContext } from './context/UserContext';
 function App() {
 
   const { username } = useContext(UserContext);
-
   return (
     <div className="App">
         {

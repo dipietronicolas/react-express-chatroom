@@ -21,7 +21,6 @@ export const UserProvider = ({ children }) => {
     <UserContext.Provider
       value={{
         username,
-        setUsername,
         addUsername
       }}>
       { children}

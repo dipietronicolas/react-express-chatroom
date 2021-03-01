@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import socketIOClient from "socket.io-client";
 
-
 const ENDPOINT = "http://127.0.0.1:4001";
 const socket = socketIOClient(ENDPOINT);
 /*
@@ -13,10 +12,10 @@ const socket = socketIOClient('/', {
 export const SocketContext = React.createContext();
 
 export const SocketProvider = ({ children }) => {
-  
+
   const [usernames, setUsernames] = useState([]);
   const [message, setMessage] = useState(null);
-  
+
   useEffect(() => {
     socket.on("usernames", data => {
       setUsernames(data);
@@ -38,10 +37,12 @@ export const SocketProvider = ({ children }) => {
   }
 
   const sendMessage = (message) => {
+
     socket.emit('send_message', {
       msg: message,
       type: "text"
     });
+
     socket.on('send_msg', (msg) => {
       setMessage(msg);
     })
@@ -49,8 +50,8 @@ export const SocketProvider = ({ children }) => {
 
   const sendPicture = (message) => {
     socket.emit('send_message', {
-      msg: message,
-      type: "picture"
+      msg: message.picture,
+      type: message.type === 'higher' ? "higher_picture" : "wider_picture"
     });
     socket.on('send_msg', (msg) => {
       setMessage(msg);
@@ -67,7 +68,7 @@ export const SocketProvider = ({ children }) => {
         sendPicture,
         message
       }}>
-      { children }
+      { children}
     </SocketContext.Provider>
   )
 }

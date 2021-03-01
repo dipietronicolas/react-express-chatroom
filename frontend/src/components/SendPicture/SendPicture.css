@@ -7,14 +7,15 @@
   justify-content: flex-start;
   align-items: center;
 }
-
 .SendPicture-upload-button {
-  margin: 0 1rem 0 0rem;
   background: none;
   border: none;
   font-size: 150%;
   color: rgb(150,150,150);
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .SendPicture-upload-button:hover {
@@ -23,22 +24,6 @@
 
 .SendPicture-upload-button:focus {
   outline: none;
-}
-
-.SendPicture-send-button {
-  background: none;
-  border: none;
-  font-size: 150%;
-  color: rgb(150,150,150);
-  cursor: pointer;
-}
-
-.SendPicture-send-button:hover {
-  color:rgb(75,75,75);
-}
-
-.SendPicture-send-button:focus {
-  outline:none;
 }
 
 .SendPicture-button:hover {
@@ -50,9 +35,29 @@
   outline: none;
 }
 
-.SendPicture-send-button-text {
-  padding-left: 1rem;
-  font-size: 95%;
+.SendPicture-upload-text {
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  font-size: 70%;
   font-style: italic;
   color: rgb(150,150,150);
+  
+}
+
+.alert-err {
+  position: absolute;
+  bottom:10%;
+  right: 20%;
+  height: 2.5rem;
+  width: 25rem;
+  background-color: rgba(220, 20, 60, 0.3);
+  font-size: 90%;
+  font-style: normal;
+  color: ivory;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 400ms;
+  transition-timing-function: ease-in-out;
+
 }

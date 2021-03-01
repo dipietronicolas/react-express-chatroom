@@ -1,7 +1,9 @@
 import React, { useState, useContext, useRef } from 'react';
 import { UserContext } from '../../context/UserContext';
 import { SocketContext } from '../../context/SocketContext';
+// CSS
 import './UserProfile.css';
+// Font Awesome
 import '@fortawesome/fontawesome-free/js/all.js';
 
 export const UserProfile = () => {
@@ -12,17 +14,19 @@ export const UserProfile = () => {
   const [showEditName, setShowEditName] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
+
   const changeUsername = (e) => {
     e.preventDefault();
-    addUsername(inputRef.current.value, (callback) => {
-      if (callback) {
-        updateUser(inputRef.current.value);
-      } else {
-        setErrorMsg('El nombre de usuario no se encuentra disponible')
-      }
-    });
-
-    handleCancelButton();
+    if (inputRef.current.value) {
+      addUsername(inputRef.current.value, (callback) => {
+        if (callback) {
+          updateUser(inputRef.current.value);
+        } else {
+          setErrorMsg('Username not available')
+        }
+      });
+      handleCancelButton();
+    }
   }
 
   const handleEditName = () => {
@@ -72,8 +76,8 @@ export const UserProfile = () => {
                 </div>
                 :
                 <p className="UserProfile-username">{username}</p>
-                
-              }
+
+            }
             <button
               className="UserProfile-edit-button"
               onClick={handleEditName}>
@@ -81,9 +85,9 @@ export const UserProfile = () => {
             </button>
           </div>
         </div>
-                {
-                  errorMsg && <div className="alert">{errorMsg}</div>
-                }
+        {
+          errorMsg && <div className="alert">{errorMsg}</div>
+        }
 
       </div>
     </div>

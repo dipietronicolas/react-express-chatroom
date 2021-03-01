@@ -1,0 +1,115 @@
+.PictureTag {
+  position: relative;
+  height: fit-content;
+  width: fit-content;
+}
+
+.PicturePreview-img-typeA {
+  width: auto;
+  height: 25rem;
+}
+
+.PicturePreview-img-typeB {
+  width: 25rem;
+  height: auto;
+  /*max-height: 70%;*/
+}
+
+.selection-container {
+  position:absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.selection-container {
+  position:absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.test {
+  position: absolute;
+  background: rgba(30, 144, 255, 0.5);
+  border: 1px dotted dodgerblue;
+}
+
+.test-with-tag {
+  background: none;
+  border: 2px dotted dodgerblue;
+}
+
+.test-finished {
+  opacity: 0.2;
+  background: none;
+}
+
+.test-finished:hover {
+  opacity: 1;
+}
+
+.tag-input {
+  position: absolute;
+  background: linear-gradient(to bottom left,rgba(240,240,240, 0.5), white, rgba(240,240,240, 0.5));
+  text-align: center;
+  width: 8rem;
+  z-index: 3;
+}
+
+.tag-input:focus {
+  outline: none;
+}
+
+
+.PicturePreview-buttons-container {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0;
+  width: 90%;
+  height: fit-content;
+  display: flex;
+  justify-content: space-between;
+  
+}
+
+.PicturePreview-button {
+  background: none;
+  border: none;
+  font-size: 150%;
+  color: rgb(150,150,150);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.PicturePreview-accept:hover {
+  color:dodgerblue;
+  text-shadow: 0px 0px 2px dodgerblue;
+}
+
+.PicturePreview-delete:hover {
+  color:crimson;
+  text-shadow: 0px 0px 2px crimson;
+}
+
+.PicturePreview-send:hover {
+  /*color:rgb(75,75,75);*/
+  color:forestgreen;
+  text-shadow: 0px 0px 10px chartreuse;
+}
+
+.PicturePreview-button:focus {
+  outline:none;
+}
+
+.PicturePreview-send-button-text {
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  font-size: 70%;
+  font-style: italic;
+  color: rgb(150,150,150);
+}

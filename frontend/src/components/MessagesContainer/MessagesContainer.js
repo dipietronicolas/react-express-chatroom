@@ -1,14 +1,20 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { SendPicture } from '../SendPicture/SendPicture';
 import { InputContainer } from '../InputContainer/InputContainer';
 import { SocketContext } from '../../context/SocketContext';
 import { Scrollbars } from 'react-custom-scrollbars';
+import { PicturePeview } from '../PicturePeview/PicturePeview';
 import './MessagesContainer.css';
 
 
 export const MessagesContainer = () => {
 
   const { sendMessage, message } = useContext(SocketContext);
+  const [picture, setPicture] = useState(null);
+
+  const handleSetPicture = (pic) => {
+    setPicture(pic);
+  }
 
   // Envio el mensaje que escribe el cliente al SocketContext
   // que se encarga de enviarlo al servidor.
@@ -35,13 +41,17 @@ export const MessagesContainer = () => {
   }
 
   //Convierte la imagen ArrayBuffer a img
-  const arrayBufferToPic = (image) => {
-    const arrayBufferView = new Uint8Array(image);
+  const arrayBufferToPic = ({ msg, type }) => {
+    const arrayBufferView = new Uint8Array(msg);
     const blob = new Blob([arrayBufferView], { type: "image/jpeg" });
     const urlCreator = window.URL || window.webkitURL;
     const imageUrl = urlCreator.createObjectURL(blob);
     return `
-      <img class="Chatroom-chat-img-container" src=${imageUrl} alt="picsend" />
+      <img class=${type === "higher_picture"
+        ? "Chatroom-chat-img-container-typeHigher"
+        : "Chatroom-chat-img-container-typeWider"
+      } 
+        src=${imageUrl} alt="picsend"/>
     `;
   }
 
@@ -60,7 +70,7 @@ export const MessagesContainer = () => {
         chat.innerHTML += `
         <div class="Chatroom-chat-name-message">
           <div class="Chatroom-chat-name-container" style="color: ${message.color}">${message.username}</div>
-          ${arrayBufferToPic(message.msg)}
+          ${arrayBufferToPic(message)}
         </div>
         `;
       }
@@ -77,6 +87,7 @@ export const MessagesContainer = () => {
       <button
         onClick={showProfileSettings}
         className="Userprofile-show-button">Settings</button>
+
       <div className="Chatroom-chat">
         <Scrollbars
           ref={(handleScroll)}
@@ -85,8 +96,15 @@ export const MessagesContainer = () => {
           autoHideDuration={500}>
 
         </Scrollbars>
+        {
+          picture &&
+          <PicturePeview
+            picture={picture.picture}
+            type={picture.type}
+            handleSetPicture={handleSetPicture} />
+        }
       </div>
-      <SendPicture />
+      <SendPicture handleSetPicture={handleSetPicture} />
       <InputContainer handleInputContainer={handleInputContainer} />
     </div>
   )

@@ -1,6 +1,7 @@
 import React, { useState, useContext, useRef } from 'react';
 import { UserContext } from '../../context/UserContext';
 import { SocketContext } from '../../context/SocketContext';
+// CSS
 import './Home.css';
 
 export const Home = () => {
@@ -9,19 +10,22 @@ export const Home = () => {
   const { newUser } = useContext(SocketContext);
   const [errorMsg, setErrorMsg] = useState(null);
 
+
   let inputRef = useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addUsername(inputRef.current.value, (callback) => {
-      if (callback) {
-        newUser(inputRef.current.value);
-      } else {
-        setErrorMsg('El nombre de usuario no se encuentra disponible')
-      }
-    })
+    if(inputRef.current.value){
+      addUsername(inputRef.current.value, (callback) => {
+        if (callback) {
+          newUser(inputRef.current.value);
+        } else {
+          setErrorMsg('Username not available')
+        }
+      })
+    }
   }
-
+  
   return (
     <div className="Home">
       <form className="Home-form" onSubmit={handleSubmit}>

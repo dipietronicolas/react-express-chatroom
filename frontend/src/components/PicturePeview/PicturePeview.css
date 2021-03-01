@@ -1,0 +1,22 @@
+.PicturePreview-container {
+  position: absolute;
+  padding-top: 1rem;
+  top: 0;
+  left: 0;
+  right: auto;
+  height: 100%;
+  width: 100%;
+  background: rgba(240,240,240,0.8);
+  border-radius:25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.PicturePreview-title {
+  font-weight: 100;
+  margin-bottom: 0.5rem;
+  font-size: 170%;
+}
+
