@@ -3,13 +3,11 @@ import { PictureTag } from '../PictureTag/PictureTag';
 import { SocketContext } from '../../context/SocketContext';
 import './PicturePeview.css';
 
-export const PicturePeview = ({ picture, type, handleSetPicture }) => {
+export const PicturePeview = ({ picture, setPicture, type, handleSetPicture }) => {
 
   const { sendPicture } = useContext(SocketContext);
   const [picURL, setPicURL] = useState(null);
   const [picType, setPicType] = useState(null);
-  // eslint-disable-next-line
-  const [acceptButtonFunction, setAcceptButtonFunction] = useState(null);
 
   // Genero una url de la imagen que llega para insertar en <img>
   useEffect(() => {
@@ -33,39 +31,39 @@ export const PicturePeview = ({ picture, type, handleSetPicture }) => {
     }
   }
 
+  // Efecto de brillo en el titulo
+  useEffect(() => {
+    const title = document.querySelector('.PicturePreview-title');
+    setTimeout(() => {
+      title.style.textShadow = "0px 0px 25px white";
+    }, 2500);
+    setTimeout(() => {
+      title.style.height = "4rem";
+      title.style.marginBottom = "3rem";
+      title.style.textShadow = "none";
+    }, 3000)
+  }, [])
 
+  // Close button handler
+  const handleCloseButton = () => {
+    setPicture(null);
+  }
 
   return (
     <div className="PicturePreview-container">
-      <h2 className="PicturePreview-title">Click to draw a square and tag people</h2>
+      <h2 className="PicturePreview-title">Click on the image to add a tag!</h2>
+      <button 
+        className="PicturePreview-close-button"
+        onClick={handleCloseButton}>
+        <i className="fas fa-times"></i>
+      </button>
       {
         picture &&
         <PictureTag
           handleSendPicture={handleSendPicture}
           picURL={picURL}
           picType={picType} />
-
       }
-      {/** 
-      <div className="PicturePreview-buttons-container">
-        <button
-          className="PicturePreview-button PicturePreview-accept">
-          <i className="fas fa-check"></i>
-          <p className="PicturePreview-send-button-text PicturePreview-accept">Accept tag</p>
-        </button>
-        <button
-          className="PicturePreview-button PicturePreview-delete">
-          <i className="far fa-times-circle"></i>
-          <p className="PicturePreview-send-button-text PicturePreview-delete">Delete last tag</p>
-        </button>
-        <button
-          onClick={handleSendPicture}
-          className="PicturePreview-button PicturePreview-send">
-          <i className="fas fa-file-import"></i>
-          <p className="PicturePreview-send-button-text PicturePreview-send">Send picture</p>
-        </button>
-      </div>
-      */}
     </div>
   )
 }

@@ -20,6 +20,9 @@ export const SocketProvider = ({ children }) => {
     socket.on("usernames", data => {
       setUsernames(data);
     });
+    socket.on('send_msg', (msg) => {
+      setMessage(msg);
+    })
   }, []);
 
   const newUser = (name) => {

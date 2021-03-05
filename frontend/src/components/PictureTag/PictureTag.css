@@ -7,12 +7,13 @@
 .PicturePreview-img-typeA {
   width: auto;
   height: 25rem;
+  user-select: none; /* Standard */
 }
 
 .PicturePreview-img-typeB {
   width: 25rem;
   height: auto;
-  /*max-height: 70%;*/
+  user-select: none; /* Standard */
 }
 
 .selection-container {
@@ -51,18 +52,40 @@
   opacity: 1;
 }
 
-.tag-input {
+.tag-input-container {
   position: absolute;
+  width: fit-content;
+  height: 1.4rem;
+  display: flex;
+}
+
+
+.tag-input {
   background: linear-gradient(to bottom left,rgba(240,240,240, 0.5), white, rgba(240,240,240, 0.5));
   text-align: center;
-  width: 8rem;
-  z-index: 3;
+  width: 10rem;
+  z-index: 2;
 }
 
 .tag-input:focus {
   outline: none;
 }
 
+.tag-confirm-button {
+  position: absolute; 
+  right: 0;
+  z-index: 3;
+  cursor:pointer;
+  height: 100%;
+  width: 2rem;
+  border: none;
+  background: none;
+  color:seagreen;
+}
+
+.tag-confirm-button:focus {
+  outline: none;
+}
 
 .PicturePreview-buttons-container {
   position: absolute;
@@ -71,8 +94,7 @@
   width: 90%;
   height: fit-content;
   display: flex;
-  justify-content: space-between;
-  
+  justify-content: flex-end;
 }
 
 .PicturePreview-button {

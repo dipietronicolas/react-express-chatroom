@@ -17,7 +17,8 @@ export const UserProfile = () => {
 
   const changeUsername = (e) => {
     e.preventDefault();
-    if (inputRef.current.value) {
+    const regex = /^(?=[a-zA-Z0-9._]{3,20}$)(?!.*[_.]{2})[^_.].*[^_.]$/
+    if ((inputRef.current.value) && regex.test(inputRef.current.value)) {
       addUsername(inputRef.current.value, (callback) => {
         if (callback) {
           updateUser(inputRef.current.value);
@@ -26,6 +27,8 @@ export const UserProfile = () => {
         }
       });
       handleCancelButton();
+    } else {
+      setErrorMsg('Usernames must have 3 to 20 alphanumeric characters and no empty spaces');
     }
   }
 

@@ -46,6 +46,15 @@ export const MessagesContainer = () => {
     const blob = new Blob([arrayBufferView], { type: "image/jpeg" });
     const urlCreator = window.URL || window.webkitURL;
     const imageUrl = urlCreator.createObjectURL(blob);
+    const img = document.createElement('img');
+    img.classList.add(
+      type === "higher_picture" 
+        ? "Chatroom-chat-img-container-typeHigher" 
+        : "Chatroom-chat-img-container-typeWider"
+    );
+    img.src = imageUrl;
+    return img;
+    /*
     return `
       <img class=${type === "higher_picture"
         ? "Chatroom-chat-img-container-typeHigher"
@@ -53,27 +62,43 @@ export const MessagesContainer = () => {
       } 
         src=${imageUrl} alt="picsend"/>
     `;
+    */
   }
 
   // Renderiza los chats que llegan
   const renderChat = () => {
     if (message) {
       const chat = document.querySelector('.Chatroom-chat').firstChild.firstChild;
+      let divContainer = document.createElement('div');
+      divContainer.classList.add('Chatroom-chat-name-message');
+
+      let divName = document.createElement('div');
+      divName.classList.add('Chatroom-chat-name-container');
+      divName.style.color = `${message.color}`
+      divName.innerText = `${message.username}`;
+      
       if (message.type === "text") {
-        chat.innerHTML += `
-        <div class="Chatroom-chat-name-message">
-          <div class="Chatroom-chat-name-container" style="color: ${message.color}">${message.username}</div>
-          <div class="Chatroom-chat-message-container">${message.msg}</div>
-        </div>
-        `;
+        let divMessage = document.createElement('div');
+        divMessage.classList.add('Chatroom-chat-message-container');
+        divMessage.innerText = `${message.msg}`;
+
+        divContainer.appendChild(divName);
+        divContainer.appendChild(divMessage);
+        chat.appendChild(divContainer);
+
       } else {
+        divContainer.appendChild(arrayBufferToPic(message));
+        
+        /*
         chat.innerHTML += `
         <div class="Chatroom-chat-name-message">
           <div class="Chatroom-chat-name-container" style="color: ${message.color}">${message.username}</div>
           ${arrayBufferToPic(message)}
         </div>
         `;
+        */
       }
+      chat.appendChild(divContainer);
     }
   }
 
@@ -100,6 +125,7 @@ export const MessagesContainer = () => {
           picture &&
           <PicturePeview
             picture={picture.picture}
+            setPicture={setPicture}
             type={picture.type}
             handleSetPicture={handleSetPicture} />
         }

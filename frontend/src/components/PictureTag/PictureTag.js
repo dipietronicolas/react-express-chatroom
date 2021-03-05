@@ -14,18 +14,15 @@ export const PictureTag = ({ handleSendPicture, picURL, picType }) => {
   const [selection_flag, setSelection_flag] = useState(true);
   const [startRenderSquare, setStartRenderSquare] = useState(false);
 
-
   useEffect(() => {
-    console.log("re-render");
+    console.log('re-render');
+    console.log(box_amount);
+    console.log(selection_flag);
   })
 
   useEffect(() => {
     setFondo(document.querySelector('.selection-container'));
   }, [])
-
-  useEffect(() => {
-
-  }, [fondo])
 
   const mouseDownListener = (e) => {
     if (selection_flag) {
@@ -35,7 +32,6 @@ export const PictureTag = ({ handleSendPicture, picURL, picType }) => {
       setY_firstPosition(e.nativeEvent.layerY);
       setBox_width(e.target.clientWidth);
       setBox_height(e.target.clientHeight);
-      setBox_amount(box_amount + 1);
       setStartRenderSquare(true);
     }
   }
@@ -50,60 +46,71 @@ export const PictureTag = ({ handleSendPicture, picURL, picType }) => {
 
   const tagSelection = () => {
     console.log("tagSelection");
-    const div = document.getElementById(`selection#0${box_amount}`);
+    const div = document.getElementById(`selection#0${box_amount + 1}`);
     if (div) {
+      // contenedor input + boton de confirmacion 
+      let inputContainer = document.createElement('div');
+      inputContainer.classList.add('tag-input-container');
+
+      // Creo el boton de confirmacion
+      let confirmButton = document.createElement('button');
+      confirmButton.classList.add('tag-confirm-button');
+      confirmButton.id = `confirm#0${box_amount + 1}`
+      confirmButton.innerHTML = '<i class="fas fa-check"></i>';
+      confirmButton.onclick = () => acceptButtonHandler();
+
+      // Creo el input para el nombre del tag
       let input = document.createElement('input');
-      console.log(`
-        div.style.height = ${div.style.height}
-        div.style.width = ${div.style.width}
-        div.style.top = ${div.style.top}
-        div.style.left = ${div.style.left}
-      `);
-
-
-
       input.type = "text";
       input.autofocus = true;
       input.classList.add('tag-input');
-      input.id = `input#0${box_amount}`
+      input.id = `input#0${box_amount + 1}`;
+      input.maxLength = '15';
+
       div.classList.add('test-with-tag');
-      div.appendChild(input);
+      inputContainer.appendChild(input);
+      inputContainer.appendChild(confirmButton);
+      div.appendChild(inputContainer);
+      setBox_amount(box_amount + 1);
       setSelection_flag(false);
     }
   }
 
   const acceptButtonHandler = () => {
-    let input = document.getElementById(`input#0${box_amount}`);
-    if (input) {
+    let input = document.getElementById(`input#0${box_amount + 1}`);
+    let button = document.getElementById(`confirm#0${box_amount + 1}`);
+    if (input || button) {
       input.classList.add('test-finished');
+      button.classList.add('test-finished');
     }
     setSelection_flag(true);
   }
 
   const deleteButtonHandler = () => {
     const square = document.getElementById(`selection#0${box_amount}`);
-    console.log(box_amount);
     if (square) {
       square.remove();
     }
-    if(box_amount > 0) {
+    if (box_amount > 0) {
       setBox_amount(box_amount - 1);
     }
+    setSelection_flag(true);
   }
 
   const renderSquare = (e) => {
-    if (startRenderSquare) {
+    if ((startRenderSquare) && (e.target.className === 'selection-container')) {
+      
       setX_secondPosition(e.nativeEvent.layerX);
       setY_secondPosition(e.nativeEvent.layerY);
 
-      const square = document.getElementById(`selection#0${box_amount}`);
+      const square = document.getElementById(`selection#0${box_amount + 1}`);
       if (square) {
         square.remove();
       }
 
       let div = document.createElement('div');
       div.classList.add('test');
-      div.id = `selection#0${box_amount}`;
+      div.id = `selection#0${box_amount + 1}`;
 
       if ((x_secondPosition - x_firstPosition >= 0) && (y_secondPosition - y_firstPosition >= 0)) {
         const ladoX = x_secondPosition - x_firstPosition;
@@ -152,17 +159,28 @@ export const PictureTag = ({ handleSendPicture, picURL, picType }) => {
           recD
           ladoX = ${ladoX}
           ladoY = ${ladoY}
-
-          x_secondPosition = ${x_secondPosition}
-          y_secondPosition = ${y_secondPosition}
         `);
-
       }
       fondo.appendChild(div);
+    } else if (startRenderSquare) {
+      const square = document.getElementById(`selection#0${box_amount + 1}`);
+      if (square) {
+        square.remove();
+      }
     }
   }
 
-
+  useEffect(()=> {
+    if(box_amount > 0){
+      for (let i = box_amount; i > 0; i--){
+        let square = document.getElementById(`selection#0${i}`);
+        if (square) {
+          square.remove();
+        }
+      }
+      setBox_amount(0);
+    }
+  }, [picURL])
 
   return (
     <>
@@ -178,12 +196,6 @@ export const PictureTag = ({ handleSendPicture, picURL, picType }) => {
           className="selection-container"></div>
       </div>
       <div className="PicturePreview-buttons-container">
-        <button
-          className="PicturePreview-button PicturePreview-accept"
-          onClick={acceptButtonHandler}>
-          <i className="fas fa-check"></i>
-          <p className="PicturePreview-send-button-text PicturePreview-accept">Accept tag</p>
-        </button>
         <button
           className="PicturePreview-button PicturePreview-delete"
           onClick={deleteButtonHandler}>
