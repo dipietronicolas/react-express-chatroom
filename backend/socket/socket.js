@@ -32,6 +32,7 @@ const socketIo = (io) => {
       const new_message = {
         msg: data.msg,
         type: data.type,
+        coordinates: data.coordinates,
         username: socket.username,
         color: socket.color
       }

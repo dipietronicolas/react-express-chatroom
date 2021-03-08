@@ -1,9 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { SendPicture } from '../SendPicture/SendPicture';
 import { InputContainer } from '../InputContainer/InputContainer';
+import { ChatShowPicture } from '../ChatShowPicture/ChatShowPicture';
+import { PicturePeview } from '../PicturePeview/PicturePeview';
 import { SocketContext } from '../../context/SocketContext';
 import { Scrollbars } from 'react-custom-scrollbars';
-import { PicturePeview } from '../PicturePeview/PicturePeview';
 import './MessagesContainer.css';
 
 
@@ -11,6 +12,8 @@ export const MessagesContainer = () => {
 
   const { sendMessage, message } = useContext(SocketContext);
   const [picture, setPicture] = useState(null);
+  const [pictureClick, setPictureClick] = useState(null);
+  
 
   const handleSetPicture = (pic) => {
     setPicture(pic);
@@ -41,7 +44,7 @@ export const MessagesContainer = () => {
   }
 
   //Convierte la imagen ArrayBuffer a img
-  const arrayBufferToPic = ({ msg, type }) => {
+  const arrayBufferToPic = ({ msg, type, coordinates }) => {
     const arrayBufferView = new Uint8Array(msg);
     const blob = new Blob([arrayBufferView], { type: "image/jpeg" });
     const urlCreator = window.URL || window.webkitURL;
@@ -53,16 +56,10 @@ export const MessagesContainer = () => {
         : "Chatroom-chat-img-container-typeWider"
     );
     img.src = imageUrl;
+    img.onclick = () => {
+      setPictureClick([imageUrl, type, coordinates]);
+    };
     return img;
-    /*
-    return `
-      <img class=${type === "higher_picture"
-        ? "Chatroom-chat-img-container-typeHigher"
-        : "Chatroom-chat-img-container-typeWider"
-      } 
-        src=${imageUrl} alt="picsend"/>
-    `;
-    */
   }
 
   // Renderiza los chats que llegan
@@ -84,19 +81,10 @@ export const MessagesContainer = () => {
 
         divContainer.appendChild(divName);
         divContainer.appendChild(divMessage);
-        chat.appendChild(divContainer);
-
+        //chat.appendChild(divContainer);
       } else {
+        divContainer.appendChild(divName);
         divContainer.appendChild(arrayBufferToPic(message));
-        
-        /*
-        chat.innerHTML += `
-        <div class="Chatroom-chat-name-message">
-          <div class="Chatroom-chat-name-container" style="color: ${message.color}">${message.username}</div>
-          ${arrayBufferToPic(message)}
-        </div>
-        `;
-        */
       }
       chat.appendChild(divContainer);
     }
@@ -128,6 +116,12 @@ export const MessagesContainer = () => {
             setPicture={setPicture}
             type={picture.type}
             handleSetPicture={handleSetPicture} />
+        }
+        {
+          pictureClick &&
+            <ChatShowPicture 
+              picture={pictureClick}
+              setPicture={setPictureClick}/>
         }
       </div>
       <SendPicture handleSetPicture={handleSetPicture} />

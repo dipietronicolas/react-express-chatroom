@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './PictureTag.css';
 
-export const PictureTag = ({ handleSendPicture, picURL, picType }) => {
+export const PictureTag = ({ handleSendPicture, picURL, picType, coordinates, setCoordinates }) => {
 
   const [fondo, setFondo] = useState(null);
   const [x_firstPosition, setX_firstPosition] = useState(0);
@@ -78,12 +78,26 @@ export const PictureTag = ({ handleSendPicture, picURL, picType }) => {
 
   const acceptButtonHandler = () => {
     let input = document.getElementById(`input#0${box_amount + 1}`);
-    let button = document.getElementById(`confirm#0${box_amount + 1}`);
-    if (input || button) {
+    if (input) {
       input.classList.add('test-finished');
-      button.classList.add('test-finished');
     }
     setSelection_flag(true);
+    
+    // Envio las coordenadas de la seleccion para ser enviadas al socket
+    const square = document.getElementById(`selection#0${box_amount + 1}`);
+    const selection = {
+      top: square.style.top,
+      left: square.style.left,
+      right: square.style.right,
+      bottom: square.style.bottom,
+      height: square.style.height,
+      width: square.style.width,
+      tag: input.value
+    }
+    setCoordinates([
+      ...coordinates,
+      selection
+    ])
   }
 
   const deleteButtonHandler = () => {
@@ -95,6 +109,9 @@ export const PictureTag = ({ handleSendPicture, picURL, picType }) => {
       setBox_amount(box_amount - 1);
     }
     setSelection_flag(true);
+    let new_coordinates = [...coordinates];
+    new_coordinates.pop();
+    setCoordinates(new_coordinates);
   }
 
   const renderSquare = (e) => {
@@ -162,6 +179,7 @@ export const PictureTag = ({ handleSendPicture, picURL, picType }) => {
         `);
       }
       fondo.appendChild(div);
+
     } else if (startRenderSquare) {
       const square = document.getElementById(`selection#0${box_amount + 1}`);
       if (square) {

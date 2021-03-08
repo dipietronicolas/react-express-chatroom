@@ -55,21 +55,6 @@ export const Home = () => {
           label="Username" 
           inputRef={inputRef}
           autoFocus/>
-        {/** 
-        <input
-          ref={inputRef}
-          name="username"
-          className="Home-input"
-          type="text"
-          maxLength="30"
-          minLength="2"
-          autoFocus />
-          */}
-        {/**
-        <button
-          className="Home-submit-button"
-          type="submit">CONFIRM</button>
-           */}
         <Button 
           type="submit"
           className={classes.button}

@@ -1,0 +1,26 @@
+.ChatShowPicture-selection-container {
+  position: absolute;
+  height: fit-content;
+  width: fit-content;
+}
+
+.ChatShowPicture-tag {
+  width: 8rem;
+  text-align: center;
+  font-size: 100%;
+}
+
+.ChatShowPicture-tag-container {
+  position: absolute;
+  border: 4px solid rgba(150,150,150,0.3);
+}
+
+.ChatShowPicture-tag-container:hover {
+  border-color: rgba(100,100,100,0.8);
+  cursor: pointer;
+}
+
+.ChatShowPicture-tag-container:hover + .ChatShowPicture-tag {
+  background: white;
+  opacity: 1;
+}

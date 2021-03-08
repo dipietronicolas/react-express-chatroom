@@ -25,6 +25,10 @@ export const SocketProvider = ({ children }) => {
     })
   }, []);
 
+  useEffect(() => {
+    console.log(message);
+  }, [message])
+
   const newUser = (name) => {
     socket.emit('new_user', name);
     socket.on("usernames", data => {
@@ -42,7 +46,8 @@ export const SocketProvider = ({ children }) => {
   const sendMessage = (message) => {
     socket.emit('send_message', {
       msg: message,
-      type: "text"
+      type: "text",
+      coordinates: []
     });
 
     socket.on('send_msg', (msg) => {
@@ -53,7 +58,8 @@ export const SocketProvider = ({ children }) => {
   const sendPicture = (message) => {
     socket.emit('send_message', {
       msg: message.picture,
-      type: message.type === 'higher' ? "higher_picture" : "wider_picture"
+      type: message.type === 'higher' ? "higher_picture" : "wider_picture",
+      coordinates: message.coordinates
     });
     socket.on('send_msg', (msg) => {
       setMessage(msg);
